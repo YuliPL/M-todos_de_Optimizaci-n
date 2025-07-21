@@ -33,12 +33,13 @@
 \definecolor{naranjaacento}{RGB}{255, 193, 7}
 \definecolor{rojoacento}{RGB}{220, 53, 69}
 \definecolor{moradoacento}{RGB}{111, 66, 193}
-\definecolor{grisclaro}{RGB}{248, 249, 250}
+\definecolor{grisclaro}{RGB}{255, 248, 220}
 \definecolor{grisoScuro}{RGB}{108, 117, 125}
 \definecolor{azulclaro}{RGB}{179, 229, 252}
 \definecolor{verdeclaro}{RGB}{212, 237, 218}
 \definecolor{naranjaclaro}{RGB}{255, 243, 205}
 \definecolor{violetaclaro}{RGB}{232, 222, 248}
+\definecolor{crema}{RGB}{255, 248, 220}
 
 % Configuraciones para cajas coloridas
 \tcbuselibrary{skins,breakable}
@@ -58,8 +59,8 @@
 	% PORTADA SUPER ATRACTIVA
 	\begin{titlepage}
 		\begin{tikzpicture}[remember picture,overlay]
-			% Fondo degradado
-			\fill[azulprincipal] (current page.south west) rectangle (current page.north east);
+			% Fondo color crema
+			\fill[crema] (current page.south west) rectangle (current page.north east);
 			\fill[azulsecundario,opacity=0.7] (current page.south west) rectangle ([yshift=8cm]current page.south east);
 			\fill[verdeprincipal,opacity=0.5] (current page.south west) rectangle ([yshift=4cm]current page.south east);
 			
@@ -157,7 +158,7 @@
 		\end{tcolorbox}
 		
 		\begin{tcolorbox}[colback=naranjaclaro,colframe=naranjaacento,boxrule=1pt,arc=5pt]
-			\textbf{\faShield\ Reducir riesgos:} Minimizar obsolescencia y deterioro
+			\textbf{Reducir riesgos:} Minimizar obsolescencia y deterioro
 		\end{tcolorbox}
 	\end{multicols}
 	
@@ -349,7 +350,59 @@
 		
 	\end{tcolorbox}
 	
-	\section{Modelos con Descuentos por Cantidad}
+	\section{Modelo EOQ con Tiempo de Entrega}
+	
+	\begin{tcolorbox}[enhanced,colback=naranjaclaro,colframe=naranjaacento,boxrule=3pt,arc=12pt,
+		drop shadow,title={\Large\bfseries\color{white} \faHourglass\ FUNDAMENTOS DEL MODELO}]
+		
+		Cuando existe un tiempo de entrega entre el momento del pedido y su recepción, es necesario determinar el punto de reorden para evitar faltantes.
+		
+	\end{tcolorbox}
+	
+	\subsection{Ejercicio Resuelto: ICR LLC}
+	
+	\begin{tcolorbox}[enhanced,colback=violetaclaro,colframe=moradoacento,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		\textbf{ICR LLC:} El director de compras recibió una oferta de ANTSIS-SA para el producto A-2147, con precio unitario de \$22.00 y tiempo de entrega de 4 días. Este suministrador ofrece entregar el pedido de forma paulatina a una tasa de 2000 unidades al mes.
+		
+		\textbf{Datos:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faArrowRight}]
+			\item D = 19500 componentes al año
+			\item S = 24072 componentes al año
+			\item K = \$22.00 por componente
+			\item Co = \$50 por pedido
+			\item Ch = (0.02)(12)(22.00) = \$5.28 por componente al año
+			\item L = 4 días
+			\item Días laborables en el año = 307
+		\end{itemize}
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ SOLUCIÓN PASO A PASO}]
+		
+		\textbf{Paso 1: Cálculo de cantidad óptima}
+		\begin{equation}
+			Q = \sqrt{\frac{2(19500)50}{5.28(1-19500/24072)}} = 1394.19 \approx 1395 \text{ componentes}
+		\end{equation}
+		
+		\textbf{Paso 2: Punto de reorden}
+		\begin{align}
+			R &= \frac{19500 \times 4}{307} = 254 \text{ componentes}
+		\end{align}
+		
+		\textbf{Paso 3: Cálculos adicionales}
+		\begin{itemize}[leftmargin=*,label=\textcolor{verdeprincipal}{\faCheck}]
+			\item Tiempo entre pedidos: $t = 1395/19500 = 0.071 \approx 21.79$ días
+			\item Número de pedidos: $n = 19500/1395 = 13.9$ pedidos
+			\item Período de reabastecimiento: $L = 1395/24072 = 0.057 \approx 17.49$ días
+			\item Inventario máximo: $I_{max} = (24072 - 19500) \times 0.057 \approx 261$ unidades
+		\end{itemize}
+		
+	\end{tcolorbox}
+	
+	\section{Modelo con Descuentos por Cantidad}
 	
 	\begin{tcolorbox}[enhanced,colback=violetaclaro,colframe=moradoacento,boxrule=3pt,arc=12pt,
 		drop shadow,title={\Large\bfseries\color{white} \faTag\ FUNDAMENTOS DEL MODELO}]
@@ -359,6 +412,13 @@
 	\end{tcolorbox}
 	
 	\subsection{Ejercicio Resuelto: MBI Computadoras}
+	
+	\begin{tcolorbox}[enhanced,colback=naranjaclaro,colframe=naranjaacento,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		\textbf{MBI:} Fabrica computadoras personales. Todas sus computadoras usan un disco duro que compra a Ynos. La fábrica opera 52 semanas por año y debe ensamblar 100 discos duros en las computadoras por semana. La tasa de costo de mantener es igual a 20\% del valor del inventario. El costo administrativo de colocar órdenes con Ynos se estima en 50 dólares.
+		
+	\end{tcolorbox}
 	
 	\begin{tcolorbox}[enhanced,colback=grisclaro,colframe=grisoScuro,boxrule=2pt,arc=8pt,
 		title={\bfseries\color{white} \faTable\ ESTRUCTURA DE DESCUENTOS}]
@@ -378,24 +438,20 @@
 			\end{tabular}
 		\end{center}
 		
-	\end{tcolorbox}
-	
-	\begin{tcolorbox}[enhanced,colback=verdeclaro,colframe=verdeprincipal,boxrule=2pt,arc=8pt,
-		title={\bfseries\color{white} \faCalculator\ ANÁLISIS DE COSTOS}]
+		\textbf{Parámetros:} D = 5,200 discos/año, S = \$50 por pedido, i = 20\%
 		
-		\textbf{Resultados del análisis:}
-		
-		\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faCheckCircle}]
+		\textbf{Análisis por categorías:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faArrowRight}]
 			\item \textbf{Q = 99:} Costo total = \textcolor{rojoacento}{\$523,616.3}
-			\item \textbf{Q = 165:} Costo total = \textcolor{naranjaacento}{\$497,143.3}  
-			\item \textbf{Q = 500:} Costo total = \textcolor{verdeprincipal}{\$473,020.0} \faArrowLeft\ ÓPTIMO
+			\item \textbf{Q = 165:} Costo total = \textcolor{naranjaacento}{\$497,143.3}
+			\item \textbf{Q = 500:} Costo total = \textcolor{verdeprincipal}{\$473,020.0} \faCheckCircle\ ÓPTIMO
 		\end{itemize}
 		
-		\textbf{Decisión:} La cantidad óptima es \textbf{500 unidades} con un ahorro significativo.
+		\textbf{Decisión:} Q* óptimo = 500 unidades, Costo total anual = \$473,020.0
 		
 	\end{tcolorbox}
 	
-	\section{Modelos de Demanda Probabilística}
+	\section{Modelo de Demanda Discreta Sin Inventario Inicial}
 	
 	\begin{tcolorbox}[enhanced,colback=naranjaclaro,colframe=naranjaacento,boxrule=3pt,arc=12pt,
 		drop shadow,title={\Large\bfseries\color{white} \faChartLine\ MODELO DE DEMANDA DISCRETA}]
@@ -406,13 +462,20 @@
 	
 	\subsection{Ejercicio Resuelto: Producto con Demanda Incierta}
 	
+	\begin{tcolorbox}[enhanced,colback=violetaclaro,colframe=moradoacento,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		El costo de compra por unidad de un producto es \$10 y su costo de tenerlo en inventario por unidad por período es de \$1. La pérdida por demandas postergadas ocasiona un costo de \$15 por unidad. ¿Cuál es la cantidad óptima a ordenar dada la distribución de probabilidad de la demanda?
+		
+	\end{tcolorbox}
+	
 	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
-		title={\bfseries\color{white} \faCalculator\ CÁLCULO DE PROPORCIÓN CRÍTICA}]
+		title={\bfseries\color{white} \faCalculator\ SOLUCIÓN}]
 		
 		\textbf{Parámetros:}
 		\begin{itemize}[leftmargin=*,label=\textcolor{verdeprincipal}{\faArrowRight}]
 			\item Costo de compra: $c = \$10$
-			\item Costo de almacenamiento: $h = \$1$  
+			\item Costo de almacenamiento: $h = \$1$
 			\item Costo de escasez: $p = \$15$
 		\end{itemize}
 		
@@ -421,7 +484,263 @@
 			\boxed{\frac{p - c}{p + h} = \frac{15 - 10}{15 + 1} = 0.3125}
 		\end{equation}
 		
+		\begin{center}
+			\small
+			\begin{tabular}{|c|c|c|}
+				\hline
+				\rowcolor{azulclaro}
+				\textbf{d} & \textbf{P$_D$(d)} & \textbf{$\sum$P$_D$(d)} \\
+				\hline
+				0 & 0.05 & 0.05 \\
+				1 & 0.10 & 0.15 \\
+				2 & 0.10 & 0.25 \\
+				3 & 0.20 & 0.45 \\
+				4 & 0.25 & 0.70 \\
+				5 & 0.15 & 0.85 \\
+				6 & 0.05 & 0.90 \\
+				7 & 0.05 & 0.95 \\
+				8 & 0.05 & 1.00 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		Como P(D $\leq$ 2) = 0.25 $<$ 0.3125 y P(D $\leq$ 3) = 0.45 $>$ 0.3125
+		
 		\textbf{Cantidad óptima:} $y^* = 3$ unidades
+		
+	\end{tcolorbox}
+	
+	\section{Modelo Probabilístico de Un Período}
+	
+	\subsection{Ejercicio Resuelto: Chicago Cheese}
+	
+	\begin{tcolorbox}[enhanced,colback=verdeclaro,colframe=verdeprincipal,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		Teresa Granger es gerente de Chicago Cheese, que elabora quesos para untar y otros productos de queso relacionados. E-Z Spread Cheese es un producto que siempre ha sido muy popular. 
+		
+		\textbf{Datos del problema:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faArrowRight}]
+			\item Precio de venta: \$100 por caja
+			\item Costo de producción: \$75 por caja
+			\item Valor de salvamento: \$50 por caja (productos no vendidos)
+			\item Teresa nunca vende queso de más de una semana
+		\end{itemize}
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ SOLUCIÓN}]
+		
+		\textbf{Costos marginales:}
+		\begin{align}
+			Co &= 100 - 75 = \$25 \text{ (costo de oportunidad por falta)}\\
+			Cu &= 75 - 50 = \$25 \text{ (costo de exceso)}
+		\end{align}
+		
+		\textbf{Proporción crítica:}
+		\begin{equation}
+			\frac{Cu}{Co + Cu} = \frac{25}{25 + 25} = 0.50
+		\end{equation}
+		
+		\begin{center}
+			\small
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				\rowcolor{azulclaro}
+				\textbf{Demanda} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} \\
+				\hline
+				Probabilidad & 0.2 & 0.3 & 0.2 & 0.2 & 0.1 \\
+				\hline
+				Prob. Acum. & 0.2 & 0.5 & 0.7 & 0.9 & 1.0 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		Como la proporción crítica es 0.50, y P(D $\leq$ 11) = 0.5
+		
+		\textbf{Respuesta:} Producir \textbf{11 o 12 cajas de queso}
+		
+	\end{tcolorbox}
+	
+	\section{Modelo de Tienda de Abarrotes con Demanda Probabilística}
+	
+	\subsection{Ejercicio Resuelto: Gestión con Demanda Normal}
+	
+	\begin{tcolorbox}[enhanced,colback=violetaclaro,colframe=moradoacento,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		Una tienda de abarrotes atiende una demanda anual de un cierto producto, la cual se distribuye como una Normal con promedio 1000 cajas con desviación estándar = 40.8 cajas. El costo de hacer un pedido es \$50 y demora en llegar 2 semanas. El costo anual por conservar una caja en inventario es \$10. A la larga, debe cumplirse la demanda (no hay ventas perdidas). El costo del agotamiento de las existencias por caja es de \$20. Considere 52 semanas/año.
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ SOLUCIÓN}]
+		
+		\textbf{Parámetros del problema:}
+		\begin{align}
+			\mu_0 &= 1000 \text{ cajas/año}\\
+			\sigma_0 &= 40.8 \text{ cajas/año}\\
+			k &= \$50 \text{ por pedido}\\
+			L &= 2 \text{ semanas}\\
+			h &= \$10 \text{ por caja/año}\\
+			C_u &= \$20 \text{ por caja}
+		\end{align}
+		
+		\textbf{Demanda durante el lead time:}
+		\begin{align}
+			\mu_L &= \frac{1000 \times 2}{52} = 38.5 \text{ cajas}\\
+			\sigma_L &= \frac{40.8 \times 2}{52} = 8.002 \text{ cajas}
+		\end{align}
+		
+		\textbf{Resultados óptimos:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{verdeprincipal}{\faCheckCircle}]
+			\item $Q^* = 100.00$ cajas
+			\item $R^* = 51.62$ cajas (punto de reorden)
+			\item Número de pedidos por año: 10.00
+		\end{itemize}
+		
+	\end{tcolorbox}
+	
+	\section{Modelo de Producción con Pedidos Atrasados}
+	
+	\subsection{Ejercicio Resuelto: Empresa Ladrillera}
+	
+	\begin{tcolorbox}[enhanced,colback=naranjaclaro,colframe=naranjaacento,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		Una empresa ladrillera tiene una demanda anual de 210,000 ladrillos. Dicha empresa los produce a un ritmo mensual de 37,500 ladrillos. Se incurre en un costo de \$450 cada vez que se realiza una corrida de producción, el costo anual de almacenamiento es de 1.2 \$/unidad, y el costo anual por tener demanda pendiente es 0.5 \$/unidad. Asumir 360 días por año.
+		
+		\textbf{Se pide:} 1) El tamaño óptimo de cada corrida de producción, 2) La cantidad de corridas de producción que se deben hacer cada año, 3) El costo total, 4) El nivel máximo de inventario, 5) La demanda pendiente máxima.
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ RESULTADOS}]
+		
+		\textbf{Parámetros calculados:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faArrowRight}]
+			\item Demanda diaria: 210,000/360 = 583.33 ladrillos/día
+			\item Producción diaria: 37,500 × 12/360 = 1,250 ladrillos/día
+		\end{itemize}
+		
+		\textbf{Resultados del modelo:}
+		\begin{center}
+			\small
+			\begin{tabular}{|l|c|}
+				\hline
+				\rowcolor{azulclaro}
+				\textbf{Parámetro} & \textbf{Valor} \\
+				\hline
+				Cantidad óptima (Q*) & 31,686.95 ladrillos \\
+				\hline
+				Inventario máximo & 10,537.46 ladrillos \\
+				\hline
+				Déficit máximo & 11,929.2 ladrillos \\
+				\hline
+				Corridas por año & 6.63 \\
+				\hline
+				Costo total anual & \$5,964.6 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+	\end{tcolorbox}
+	
+	\section{Modelo EOQ con Desabastecimientos}
+	
+	\subsection{Ejercicio Resuelto: Sistema con Escasez Planificada}
+	
+	\begin{tcolorbox}[enhanced,colback=verdeclaro,colframe=verdeprincipal,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		Un administrador de un sistema de inventario ha utilizado durante años el modelo del lote económico en su trabajo, pero piensa que incorporando escasez planificada debe obtener un resultado más rentable. ¿Es esto correcto?
+		
+		Considerar un producto cuya demanda es de 800 unidades, cuyo costo de mantener en inventario una unidad durante un mes es de 0.25 € cuyo costo de ordenamiento es de 150 € y cuyo costo de no poseer una unidad durante un año es de 20 €.
+		
+		\textbf{Preguntas:}
+		a) ¿Cuál es el ahorro que se produce si utilizamos el modelo de desabastecimientos permitidos?
+		b) Si el tiempo de entrega es de 1 mes, ¿cuál es el punto de reorden?
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ SOLUCIÓN}]
+		
+		\textbf{Parámetros del modelo:}
+		\begin{align}
+			D &= 800 \text{ unidades/año}\\
+			C_o &= 150 \text{ € por pedido}\\
+			C_s &= 20 \text{ € por unidad/año (escasez)}\\
+			C_h &= 0.25 \times 12 = 3 \text{ € por unidad/año}
+		\end{align}
+		
+		\textbf{Modelo EOQ básico:}
+		\begin{equation}
+			Q_{EOQ} = \sqrt{\frac{2 \times 150 \times 800}{3}} = 282.843 \text{ unidades}
+		\end{equation}
+		
+		\textbf{Modelo con desabastecimientos:}
+		\begin{align}
+			Q^* &= \sqrt{\frac{2 \times 150 \times 800}{3}} \times \sqrt{\frac{3 + 20}{20}} = 303.315 \text{ unidades}\\
+			S^* &= \frac{20}{3 + 20} \times 303.315 = 263.752 \text{ unidades}
+		\end{align}
+		
+		\textbf{Resultados:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{verdeprincipal}{\faCheckCircle}]
+			\item Costo EOQ tradicional: 848.528 €
+			\item Costo con desabastecimientos: 791.256 €
+			\item \textbf{Ahorro: 57.272 €} (justifica la escasez planificada)
+			\item Punto de reorden (L = 1 mes): R = 66.666 unidades
+		\end{itemize}
+		
+	\end{tcolorbox}
+	
+	\section{Modelo Probabilístico de Revisión Periódica (R,S)}
+	
+	\subsection{Ejercicio Resuelto: Modelo (R,S)}
+	
+	\begin{tcolorbox}[enhanced,colback=violetaclaro,colframe=moradoacento,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		Sea un producto cuyo costo es de c = \$60.00, pero si no se dispone de él cuando se necesita, ocasiona una pérdida de \$800.00 y si se ha comprado y no se utiliza debe pagarse un costo de almacenamiento de \$10.00 por período R. La demanda es discreta con probabilidades para cada cantidad dadas por una tabla específica.
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ SOLUCIÓN}]
+		
+		\textbf{Parámetros:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faArrowRight}]
+			\item Costo del producto: c = \$60.00
+			\item Costo de ruptura: p = \$800.00
+			\item Costo de almacenamiento: h = \$10.00 por período R
+		\end{itemize}
+		
+		\textbf{Proporción crítica:}
+		\begin{equation}
+			\frac{p}{h + p} = \frac{800}{10 + 800} = 0.98765432
+		\end{equation}
+		
+		\begin{center}
+			\small
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				\rowcolor{azulclaro}
+				\textbf{d} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5+} \\
+				\hline
+				P(d) & 0.1 & 0.2 & 0.2 & 0.3 & 0.1 & 0.1 \\
+				\hline
+				P(D $\leq$ d) & 0.1 & 0.3 & 0.5 & 0.8 & 0.9 & 1.0 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		El modelo utiliza la expresión $M(D \leq q^*) = p/(h + p) = 0.98765432$
+		
+		Como P(D $\leq$ 4) = 0.9 $<$ 0.98765432 y P(D $\leq$ 5) = 1.0 $>$ 0.98765432
+		
+		\textbf{Decisión óptima:} Ordenar hasta el nivel S = \textbf{4 unidades}
 		
 	\end{tcolorbox}
 	
@@ -435,6 +754,20 @@
 		\textbf{Importancia del Análisis de Costos:} El factor crítico es el correcto análisis de costos: ordenamiento, almacenamiento, escasez y adquisición.
 		
 		\textbf{Impacto de la Incertidumbre:} Los modelos probabilísticos permiten gestión realista incorporando distribuciones de probabilidad.
+		
+		\textbf{Resumen de Ejercicios Resueltos:}
+		\begin{enumerate}[leftmargin=*,label=\textcolor{azulprincipal}{\arabic*.}]
+			\item \textbf{EOQ con pedidos retrasados:} Clínica de optometría - Q* = 538 monturas
+			\item \textbf{Lote de producción:} Flemming Accessories - Q* = 1,632 minicortadoras  
+			\item \textbf{EOQ con tiempo de entrega:} ICR LLC - Q* = 1,395 componentes, R = 254
+			\item \textbf{Descuentos por cantidad:} MBI Computadoras - Q* = 500 discos, Ahorro significativo
+			\item \textbf{Demanda discreta:} Producto incierto - Q* = 3 unidades
+			\item \textbf{Modelo probabilístico:} Chicago Cheese - Producir 11 o 12 cajas
+			\item \textbf{Demanda normal:} Tienda de abarrotes - Q* = 100 cajas, R* = 52 cajas
+			\item \textbf{Producción con atrasos:} Empresa ladrillera - Q* = 31,687 ladrillos
+			\item \textbf{EOQ con desabastecimientos:} Ahorro de 57.272 € vs EOQ tradicional
+			\item \textbf{Modelo (R,S):} Sistema de revisión periódica - Nivel S = 4 unidades
+		\end{enumerate}
 		
 	\end{tcolorbox}
 	
