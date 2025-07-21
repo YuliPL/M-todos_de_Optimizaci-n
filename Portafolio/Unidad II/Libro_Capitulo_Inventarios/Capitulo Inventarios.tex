@@ -1,0 +1,486 @@
+\documentclass[12pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{shadow}
+\usepackage{multicol}
+\usepackage{colortbl}
+
+\geometry{left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
+\setlength{\headheight}{30pt}
+\pgfplotsset{compat=1.18}
+
+% Definir paleta de colores moderna y atractiva
+\definecolor{azulprincipal}{RGB}{41, 98, 255}
+\definecolor{azulsecundario}{RGB}{0, 123, 255}
+\definecolor{verdeprincipal}{RGB}{40, 167, 69}
+\definecolor{verdesecundario}{RGB}{25, 135, 84}
+\definecolor{naranjaacento}{RGB}{255, 193, 7}
+\definecolor{rojoacento}{RGB}{220, 53, 69}
+\definecolor{moradoacento}{RGB}{111, 66, 193}
+\definecolor{grisclaro}{RGB}{248, 249, 250}
+\definecolor{grisoScuro}{RGB}{108, 117, 125}
+\definecolor{azulclaro}{RGB}{179, 229, 252}
+\definecolor{verdeclaro}{RGB}{212, 237, 218}
+\definecolor{naranjaclaro}{RGB}{255, 243, 205}
+\definecolor{violetaclaro}{RGB}{232, 222, 248}
+
+% Configuraciones para cajas coloridas
+\tcbuselibrary{skins,breakable}
+
+% Configuración de encabezados
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\colorbox{azulprincipal}{\textcolor{white}{\bfseries\thepage}}}
+\fancyhead[LO,RE]{\textcolor{azulprincipal}{\bfseries Capítulo: Inventarios}}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{azulprincipal}\leaders\hrule height \headrulewidth\hfill}}
+
+\usetikzlibrary{shapes.geometric, arrows, shadows, patterns}
+
+\begin{document}
+	
+	% PORTADA SUPER ATRACTIVA
+	\begin{titlepage}
+		\begin{tikzpicture}[remember picture,overlay]
+			% Fondo degradado
+			\fill[azulprincipal] (current page.south west) rectangle (current page.north east);
+			\fill[azulsecundario,opacity=0.7] (current page.south west) rectangle ([yshift=8cm]current page.south east);
+			\fill[verdeprincipal,opacity=0.5] (current page.south west) rectangle ([yshift=4cm]current page.south east);
+			
+			% Elementos decorativos
+			\foreach \i in {1,...,20}
+			{
+				\fill[white,opacity=0.1] ([xshift=\i cm, yshift=\i cm]current page.south west) circle (0.5);
+			}
+			
+			% Líneas decorativas
+			\draw[white,line width=3pt,opacity=0.8] ([yshift=2cm]current page.south west) -- ([yshift=2cm]current page.south east);
+			\draw[naranjaacento,line width=2pt] ([yshift=2.2cm]current page.south west) -- ([yshift=2.2cm]current page.south east);
+		\end{tikzpicture}
+		
+		\centering
+		\vspace{1.5cm}
+		
+		% Universidad
+		\begin{tcolorbox}[colback=white,colframe=azulprincipal,boxrule=3pt,arc=15pt,drop shadow]
+			\centering
+			{\Large\bfseries\color{azulprincipal} \faUniversity\ UNIVERSIDAD NACIONAL DEL ALTIPLANO}\\[0.3cm]
+			{\large\color{grisoScuro} Ingeniería Estadística e Informática}
+		\end{tcolorbox}
+		
+		\vspace{1.5cm}
+		
+		% Título del capítulo con efectos
+		\begin{tcolorbox}[colback=naranjaclaro,colframe=naranjaacento,boxrule=3pt,arc=15pt,drop shadow]
+			\centering
+			{\Huge\bfseries\color{rojoacento} CAPÍTULO: INVENTARIOS}\\[0.5cm]
+			{\Large\color{grisoScuro} \faBoxes\ Modelos de Gestión Óptima}
+		\end{tcolorbox}
+		
+		\vspace{1.5cm}
+		
+		% Iconos temáticos
+		\begin{tikzpicture}
+			\node[azulprincipal,scale=3] at (-3,0) {\faCalculator};
+			\node[verdeprincipal,scale=3] at (0,0) {\faChartArea};
+			\node[rojoacento,scale=3] at (3,0) {\faCogs};
+		\end{tikzpicture}
+		
+		\vspace{1.5cm}
+		
+		% Subtítulos con iconos
+		\begin{tcolorbox}[colback=violetaclaro,colframe=moradoacento,boxrule=2pt,arc=10pt]
+			\centering
+			{\large\bfseries\color{moradoacento} \faLightbulb\ EOQ • Descuentos • Probabilísticos • Optimización}\\[0.3cm]
+			{\normalsize\color{grisoScuro} Modelos Determinísticos y Probabilísticos para la Gestión Empresarial}
+		\end{tcolorbox}
+		
+		\vfill
+		
+		% Información del autor
+		\begin{tcolorbox}[colback=grisclaro,colframe=grisoScuro,boxrule=2pt,arc=8pt,drop shadow]
+			\centering
+			{\Large\bfseries\color{azulprincipal} \faUser\ AUTOR}\\[0.5cm]
+			{\LARGE\bfseries\color{rojoacento} Etzel Yuliza Peralta López}\\[0.3cm]
+			{\large\color{grisoScuro} Material de Estudio Especializado}
+		\end{tcolorbox}
+		
+	\end{titlepage}
+	
+	\newpage
+	
+	% ÍNDICE COLORIDO
+	\begin{tcolorbox}[colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=10pt,title={\Large\bfseries\color{white} \faList\ CONTENIDO DEL CAPÍTULO}]
+		\tableofcontents
+	\end{tcolorbox}
+	
+	\newpage
+	
+	% INTRODUCCIÓN CON DISEÑO ATRACTIVO
+	\chapter{Inventarios}
+	
+	\begin{tcolorbox}[colback=naranjaclaro,colframe=naranjaacento,boxrule=2pt,arc=10pt,title={\large\bfseries\color{white} \faInfoCircle\ INTRODUCCIÓN}]
+		
+		Los modelos de inventarios constituyen una herramienta fundamental en la gestión empresarial moderna, permitiendo a las organizaciones optimizar sus recursos financieros y operativos. El inventario representa uno de los activos más significativos en muchas empresas, y su gestión eficiente puede determinar el éxito o fracaso de una organización.
+		
+	\end{tcolorbox}
+	
+	\section{Importancia de la Gestión de Inventarios}
+	
+	\begin{multicols}{2}
+		\begin{tcolorbox}[colback=verdeclaro,colframe=verdeprincipal,boxrule=1pt,arc=5pt]
+			\textbf{\faCheckCircle\ Minimizar costos totales:} Incluyendo costos de pedido, almacenamiento y escasez
+		\end{tcolorbox}
+		
+		\begin{tcolorbox}[colback=azulclaro,colframe=azulprincipal,boxrule=1pt,arc=5pt]
+			\textbf{\faUsers\ Mantener niveles de servicio:} Satisfacer la demanda del cliente
+		\end{tcolorbox}
+		
+		\begin{tcolorbox}[colback=violetaclaro,colframe=moradoacento,boxrule=1pt,arc=5pt]
+			\textbf{\faDollarSign\ Optimizar el capital de trabajo:} Evitar inversiones excesivas en inventario
+		\end{tcolorbox}
+		
+		\begin{tcolorbox}[colback=naranjaclaro,colframe=naranjaacento,boxrule=1pt,arc=5pt]
+			\textbf{\faShield\ Reducir riesgos:} Minimizar obsolescencia y deterioro
+		\end{tcolorbox}
+	\end{multicols}
+	
+	\subsection{Tipos de Modelos de Inventarios}
+	
+	\begin{tcolorbox}[enhanced,colback=grisclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faChartPie\ CLASIFICACIÓN POR PATRÓN DE DEMANDA}]
+		
+		\begin{itemize}[leftmargin=*,label=\textcolor{verdeprincipal}{\faArrowRight}]
+			\item \textbf{\color{azulprincipal}Determinísticos:} La demanda es conocida y constante
+			\item \textbf{\color{rojoacento}Probabilísticos:} La demanda es variable y sigue una distribución de probabilidad
+		\end{itemize}
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=verdeclaro,colframe=verdeprincipal,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faClock\ CLASIFICACIÓN POR TIEMPO DE ENTREGA}]
+		
+		\begin{itemize}[leftmargin=*,label=\textcolor{naranjaacento}{\faArrowRight}]
+			\item \textbf{\color{verdeprincipal}Tiempo de entrega cero:} El pedido se recibe inmediatamente
+			\item \textbf{\color{azulprincipal}Tiempo de entrega constante:} El tiempo entre pedido y entrega es fijo
+			\item \textbf{\color{rojoacento}Tiempo de entrega variable:} El tiempo de entrega varía aleatoriamente
+		\end{itemize}
+		
+	\end{tcolorbox}
+	
+	\section{Modelo EOQ Básico}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=3pt,arc=12pt,
+		drop shadow,title={\Large\bfseries\color{white} \faLightbulb\ FUNDAMENTOS TEÓRICOS}]
+		
+		El modelo de Cantidad Económica de Pedido (EOQ) es el modelo más fundamental en la teoría de inventarios. Fue desarrollado por Ford W. Harris en 1913 y busca determinar la cantidad óptima de pedido que minimiza los costos totales de inventario.
+		
+	\end{tcolorbox}
+	
+	\subsection{Supuestos del Modelo EOQ}
+	
+	\begin{enumerate}[leftmargin=*,label=\textcolor{azulprincipal}{\faCircle\ \arabic*}]
+		\item \textcolor{verdeprincipal}{\textbf{La demanda es determinística y constante}}
+		\item \textcolor{azulprincipal}{\textbf{El tiempo de entrega es constante}}
+		\item \textcolor{rojoacento}{\textbf{No se permiten faltantes}}
+		\item \textcolor{moradoacento}{\textbf{El costo unitario es constante}}
+		\item \textcolor{naranjaacento}{\textbf{Los costos de pedido y almacenamiento son constantes}}
+		\item \textcolor{grisoScuro}{\textbf{La tasa de consumo es mayor que la de producción}}
+	\end{enumerate}
+	
+	\subsection{Componentes de Costo}
+	
+	\begin{multicols}{3}
+		\begin{tcolorbox}[colback=verdeclaro,colframe=verdeprincipal,boxrule=2pt,arc=8pt,center title,
+			title={\bfseries\color{white} \faShoppingCart\ PEDIDO}]
+			\centering
+			Costo fijo incurrido cada vez que se realiza un pedido, independiente de la cantidad ordenada.
+		\end{tcolorbox}
+		
+		\begin{tcolorbox}[colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,center title,
+			title={\bfseries\color{white} \faWarehouse\ ALMACENAMIENTO}]
+			\centering
+			Costo de mantener una unidad en inventario durante un período específico.
+		\end{tcolorbox}
+		
+		\begin{tcolorbox}[colback=naranjaclaro,colframe=naranjaacento,boxrule=2pt,arc=8pt,center title,
+			title={\bfseries\color{white} \faCoins\ ADQUISICIÓN}]
+			\centering
+			Costo variable proporcional a la cantidad adquirida.
+		\end{tcolorbox}
+	\end{multicols}
+	
+	\subsection{Fórmula del EOQ}
+	
+	\begin{tcolorbox}[enhanced,colback=white,colframe=azulprincipal,boxrule=3pt,arc=10pt,
+		drop shadow,title={\Large\bfseries\color{white} \faCalculator\ CANTIDAD ECONÓMICA DE PEDIDO}]
+		
+		\begin{equation}
+			\boxed{\color{azulprincipal} Q^* = \sqrt{\frac{2DS}{H}}}
+		\end{equation}
+		
+		\begin{center}
+			\begin{tabular}{cl}
+				\textcolor{azulprincipal}{\faArrowRight} & $Q^*$ = Cantidad óptima de pedido \\
+				\textcolor{verdeprincipal}{\faArrowRight} & $D$ = Demanda anual \\
+				\textcolor{rojoacento}{\faArrowRight} & $S$ = Costo de pedido por orden \\
+				\textcolor{moradoacento}{\faArrowRight} & $H$ = Costo de almacenamiento por unidad por año \\
+			\end{tabular}
+		\end{center}
+		
+	\end{tcolorbox}
+	
+	\subsection{Ejercicio Resuelto: EOQ con Pedidos Retrasados}
+	
+	\begin{tcolorbox}[enhanced,colback=naranjaclaro,colframe=naranjaacento,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		\textbf{Clínica de Optometría:} Una clínica vende 10,000 monturas anuales. El proveedor cobra \$15 por unidad, con costo de pedido de \$50. El costo de déficit es \$15 por montura/año por pérdida de negocios futuros. El costo de retención anual es 30\% del costo de compra.
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ SOLUCIÓN PASO A PASO}]
+		
+		\textbf{Paso 1: Identificación de parámetros}
+		\begin{align}
+			D &= 10,000 \text{ monturas/año}\\
+			S &= \$50 \text{ por pedido}\\
+			H &= 0.30 \times \$15 = \$4.5 \text{ por unidad/año}\\
+			B &= \$15 \text{ por unidad/año (costo de déficit)}\\
+			C &= \$15 \text{ por unidad}
+		\end{align}
+		
+		\textbf{Paso 2: Cálculo de la cantidad óptima}
+		
+		\begin{equation}
+			\boxed{Q^* = \sqrt{\frac{2DS}{H}} \times \sqrt{\frac{H + B}{B}}}
+		\end{equation}
+		
+		\begin{align}
+			Q^* &= \sqrt{\frac{2 \times 10,000 \times 50}{4.5}} \times \sqrt{\frac{4.5 + 15}{15}}\\
+			&= \sqrt{222,222.22} \times \sqrt{1.3}\\
+			&= 471.4 \times 1.14\\
+			&= \textbf{537.48 $\approx$ 538 monturas}
+		\end{align}
+		
+		\textbf{Paso 3: Cálculo del inventario máximo}
+		
+		\begin{align}
+			I_{max} &= 537.48 \times \frac{15}{4.5 + 15} = \textbf{413.48 $\approx$ 414 monturas}
+		\end{align}
+		
+		\textbf{Paso 4: Déficit máximo}
+		
+		\begin{align}
+			\text{Déficit máximo} &= 537.48 - 413.48 = \textbf{124 monturas}
+		\end{align}
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=grisclaro,colframe=grisoScuro,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faTable\ TABLA DE RESULTADOS}]
+		
+		\begin{center}
+			\small
+			\begin{tabular}{|l|c|l|c|}
+				\hline
+				\rowcolor{azulclaro}
+				\textbf{Parámetro} & \textbf{Valor} & \textbf{Parámetro} & \textbf{Valor} \\
+				\hline
+				Demand rate(D) & 10000 & Optimal order quantity (Q*) & \textcolor{verdeprincipal}{\textbf{537.48}} \\
+				\hline
+				Setup cost(S) & 50 & Maximum Inventory Level & \textcolor{azulprincipal}{\textbf{413.45}} \\
+				\hline
+				Holding cost(H) & 4.5 & Maximum Shortage & \textcolor{rojoacento}{\textbf{124.03}} \\
+				\hline
+				Backorder cost(B) & 15 & Orders per year & 18.61 \\
+				\hline
+				Unit cost & 15 & Total Cost & \textcolor{moradoacento}{\textbf{151860.5}} \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+	\end{tcolorbox}
+	
+	\section{Modelo de Lote de Producción}
+	
+	\begin{tcolorbox}[enhanced,colback=verdeclaro,colframe=verdeprincipal,boxrule=3pt,arc=12pt,
+		drop shadow,title={\Large\bfseries\color{white} \faCogs\ FUNDAMENTOS DEL MODELO}]
+		
+		El modelo de lote de producción se aplica cuando la empresa produce el artículo internamente en lugar de comprarlo a un proveedor externo. La principal diferencia con el EOQ básico es que el inventario se acumula gradualmente durante la producción.
+		
+	\end{tcolorbox}
+	
+	\subsection{Ejercicio Resuelto: Flemming Accessories}
+	
+	\begin{tcolorbox}[enhanced,colback=violetaclaro,colframe=moradoacento,boxrule=2pt,arc=8pt,
+		drop shadow,title={\bfseries\color{white} \faPuzzlePiece\ PROBLEMA}]
+		
+		\textbf{Flemming Accessories:} Fabrica cortadoras de papel. Demanda anual: 6,750 unidades constantes. Kristen puede fabricar 125/día en promedio. Demanda durante producción: 30/día. Costo de preparación: \$150. Costo de almacenamiento: \$1/minicortadora/año.
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ SOLUCIÓN}]
+		
+		\textbf{Parámetros:}
+		\begin{align}
+			D &= 6,750 \text{ unidades/año}\\
+			p &= 125 \times 225 = 28,125 \text{ unidades/año}\\
+			Q^* &= \textbf{1,632 unidades}
+		\end{align}
+		
+	\end{tcolorbox}
+	
+	\section{Modelos con Descuentos por Cantidad}
+	
+	\begin{tcolorbox}[enhanced,colback=violetaclaro,colframe=moradoacento,boxrule=3pt,arc=12pt,
+		drop shadow,title={\Large\bfseries\color{white} \faTag\ FUNDAMENTOS DEL MODELO}]
+		
+		Los descuentos por cantidad son estrategias de precios donde el costo unitario disminuye según la cantidad comprada.
+		
+	\end{tcolorbox}
+	
+	\subsection{Ejercicio Resuelto: MBI Computadoras}
+	
+	\begin{tcolorbox}[enhanced,colback=grisclaro,colframe=grisoScuro,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faTable\ ESTRUCTURA DE DESCUENTOS}]
+		
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				\rowcolor{azulclaro}
+				\textbf{Categoría} & \textbf{Cantidad} & \textbf{Precio} \\
+				\hline
+				1 & 1 a 99 & \textcolor{rojoacento}{\$100} \\
+				\hline
+				2 & 100 a 499 & \textcolor{naranjaacento}{\$95} \\
+				\hline
+				3 & 500 o más & \textcolor{verdeprincipal}{\$90} \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[enhanced,colback=verdeclaro,colframe=verdeprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ ANÁLISIS DE COSTOS}]
+		
+		\textbf{Resultados del análisis:}
+		
+		\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faCheckCircle}]
+			\item \textbf{Q = 99:} Costo total = \textcolor{rojoacento}{\$523,616.3}
+			\item \textbf{Q = 165:} Costo total = \textcolor{naranjaacento}{\$497,143.3}  
+			\item \textbf{Q = 500:} Costo total = \textcolor{verdeprincipal}{\$473,020.0} \faArrowLeft\ ÓPTIMO
+		\end{itemize}
+		
+		\textbf{Decisión:} La cantidad óptima es \textbf{500 unidades} con un ahorro significativo.
+		
+	\end{tcolorbox}
+	
+	\section{Modelos de Demanda Probabilística}
+	
+	\begin{tcolorbox}[enhanced,colback=naranjaclaro,colframe=naranjaacento,boxrule=3pt,arc=12pt,
+		drop shadow,title={\Large\bfseries\color{white} \faChartLine\ MODELO DE DEMANDA DISCRETA}]
+		
+		Cuando la demanda sigue una distribución de probabilidad discreta, utilizamos el modelo de cantidad crítica.
+		
+	\end{tcolorbox}
+	
+	\subsection{Ejercicio Resuelto: Producto con Demanda Incierta}
+	
+	\begin{tcolorbox}[enhanced,colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+		title={\bfseries\color{white} \faCalculator\ CÁLCULO DE PROPORCIÓN CRÍTICA}]
+		
+		\textbf{Parámetros:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{verdeprincipal}{\faArrowRight}]
+			\item Costo de compra: $c = \$10$
+			\item Costo de almacenamiento: $h = \$1$  
+			\item Costo de escasez: $p = \$15$
+		\end{itemize}
+		
+		\textbf{Proporción crítica:}
+		\begin{equation}
+			\boxed{\frac{p - c}{p + h} = \frac{15 - 10}{15 + 1} = 0.3125}
+		\end{equation}
+		
+		\textbf{Cantidad óptima:} $y^* = 3$ unidades
+		
+	\end{tcolorbox}
+	
+	\section{Conclusiones}
+	
+	\begin{tcolorbox}[enhanced,colback=grisclaro,colframe=grisoScuro,boxrule=3pt,arc=15pt,
+		drop shadow,title={\Large\bfseries\color{white} \faFlag\ SÍNTESIS DE APRENDIZAJES}]
+		
+		\textbf{Flexibilidad de los Modelos:} Los modelos de inventarios ofrecen herramientas adaptables desde EOQ básico hasta modelos probabilísticos complejos.
+		
+		\textbf{Importancia del Análisis de Costos:} El factor crítico es el correcto análisis de costos: ordenamiento, almacenamiento, escasez y adquisición.
+		
+		\textbf{Impacto de la Incertidumbre:} Los modelos probabilísticos permiten gestión realista incorporando distribuciones de probabilidad.
+		
+	\end{tcolorbox}
+	
+	\section{Recomendaciones}
+	
+	\begin{multicols}{2}
+		\begin{tcolorbox}[colback=verdeclaro,colframe=verdeprincipal,boxrule=2pt,arc=8pt,
+			title={\bfseries\color{white} \faLaptop\ TECNOLOGÍA}]
+			\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faCheck}]
+				\item Sistemas ERP integrados
+				\item Análisis de datos avanzado  
+				\item Internet de las cosas (IoT)
+				\item Inteligencia artificial
+			\end{itemize}
+		\end{tcolorbox}
+		
+		\begin{tcolorbox}[colback=azulclaro,colframe=azulprincipal,boxrule=2pt,arc=8pt,
+			title={\bfseries\color{white} \faUsers\ DESARROLLO}]
+			\begin{itemize}[leftmargin=*,label=\textcolor{verdeprincipal}{\faCheck}]
+				\item Capacitación del personal
+				\item Cultura de mejora continua
+				\item Colaboración interdisciplinaria
+				\item Benchmarking industrial
+			\end{itemize}
+		\end{tcolorbox}
+	\end{multicols}
+	
+	\begin{tcolorbox}[enhanced,colback=naranjaclaro,colframe=naranjaacento,boxrule=3pt,arc=12pt,
+		drop shadow,title={\Large\bfseries\color{white} \faGlobe\ TENDENCIAS FUTURAS}]
+		
+		\textbf{Evolución hacia:}
+		\begin{itemize}[leftmargin=*,label=\textcolor{azulprincipal}{\faArrowRight}]
+			\item Mayor sofisticación matemática con optimización avanzada
+			\item Integración multiobjetivo considerando múltiples criterios
+			\item Adaptabilidad dinámica con ajustes automáticos
+			\item Sostenibilidad incorporando criterios ambientales
+		\end{itemize}
+		
+	\end{tcolorbox}
+	
+	\begin{center}
+		\begin{tcolorbox}[enhanced,colback=moradoacento,colframe=white,boxrule=2pt,arc=10pt,
+			width=0.8\textwidth,center]
+			\centering
+			{\Large\bfseries\color{white} \faTrophy\ La gestión óptima de inventarios seguirá siendo un factor crítico de éxito empresarial}
+		\end{tcolorbox}
+	\end{center}
+	
+\end{document}
