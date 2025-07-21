@@ -1,0 +1,302 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\geometry{margin=1in}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Optimización}
+\lhead{Evaluación Unidad I}
+\rfoot{Página \thepage}
+\title{Evaluación Unidad I – Métodos de Optimización}
+\author{Universidad Nacional del Altiplano \\ Facultad de Ingeniería Estadística e Informática}
+\date{28 de mayo de 2025}
+\begin{document}
+	\maketitle
+	
+	\section*{1. Evaluación Teórica con Explicaciones}
+	\begin{enumerate}
+		\item \textbf{¿Cuál describe mejor una función lineal?} \\
+		\textbf{Respuesta: c)} Es una función cuya gráfica es una línea recta. \\
+		\textit{Explicación:} Una función lineal tiene la forma $f(x) = ax + b$, cuya gráfica es una recta.
+		
+		\item \textbf{¿Cuál es el principal objetivo de las restricciones en programación lineal?} \\
+		\textbf{Respuesta: b)} Establecer las condiciones bajo las cuales se deben encontrar soluciones. \\
+		\textit{Explicación:} Las restricciones definen el espacio factible donde buscar la solución óptima.
+		
+		\item \textbf{¿Qué concepto define el conjunto de todas las soluciones posibles que satisfacen las restricciones?} \\
+		\textbf{Respuesta: a)} Región factible. \\
+		\textit{Explicación:} Conjunto de soluciones que cumplen todas las restricciones.
+		
+		\item \textbf{¿Cuál es un objetivo típico en los problemas de optimización?} \\
+		\textbf{Respuesta: b)} Encontrar el valor mínimo o máximo de una función objetivo sujeta a restricciones. \\
+		\textit{Explicación:} El objetivo es maximizar o minimizar una función bajo condiciones.
+		
+		\item \textbf{¿Qué condición debe cumplirse para que un sistema de ecuaciones lineales tenga una única solución?} \\
+		\textbf{Respuesta: c)} El determinante de la matriz asociada debe ser distinto de cero. \\
+		\textit{Explicación:} Garantiza que el sistema tenga una única solución.
+		
+		\item \textbf{En $Z = 40x + 60y$, ¿qué representa el valor 60?} \\
+		\textbf{Respuesta: b)} La utilidad unitaria por cada mesa vendida. \\
+		\textit{Explicación:} Es el coeficiente de la variable y en la función objetivo.
+		
+		\item \textbf{¿Qué tipo de función es típicamente la función objetivo en programación lineal?} \\
+		\textbf{Respuesta: c)} Una función lineal. \\
+		\textit{Explicación:} En programación lineal, tanto las restricciones como la función objetivo son lineales.
+		
+		\item \textbf{¿Qué diferencia hay entre restricciones de igualdad y desigualdad?} \\
+		\textbf{Respuesta: b)} Las restricciones de desigualdad limitan el conjunto factible, mientras que las de igualdad lo definen completamente. \\
+		\textit{Explicación:} Las desigualdades permiten áreas de solución; las igualdades las fijan en líneas.
+		
+		\item \textbf{¿Cuál de los siguientes no es un tipo de restricción en programación lineal?} \\
+		\textbf{Respuesta: d)} Restricciones no lineales. \\
+		\textit{Explicación:} Las restricciones deben ser lineales en este tipo de programación.
+		
+		\item \textbf{¿De qué depende principalmente el tiempo de ejecución de un algoritmo de optimización?} \\
+		\textbf{Respuesta: e)} La complejidad del algoritmo utilizado. \\
+		\textit{Explicación:} La eficiencia algorítmica determina el rendimiento.
+	\end{enumerate}
+	
+	\newpage
+	
+	\section*{2. Evaluación Práctica}
+	
+	\subsection*{Pregunta Práctica 1: Servidores de Análisis de Datos}
+	
+	\subsubsection*{Datos del Problema}
+	\begin{itemize}
+		\item \textbf{Servidor A:} Procesa 500 GB en 10 horas, costo 50 soles/hora, límite 12 horas/día
+		\item \textbf{Servidor B:} Procesa 300 GB en 8 horas, costo 30 soles/hora, límite 12 horas/día
+		\item \textbf{Almacenamiento total:} 4000 GB/día
+		\item \textbf{Presupuesto energía:} 1200 soles/día
+		\item \textbf{Objetivo:} Maximizar datos procesados
+	\end{itemize}
+	
+	\subsubsection*{Paso 1: Definición de Variables}
+	\begin{align}
+		x &= \text{horas de funcionamiento del Servidor A}\\
+		y &= \text{horas de funcionamiento del Servidor B}
+	\end{align}
+	
+	\subsubsection*{Paso 2: Cálculo de Tasas de Procesamiento}
+	\begin{align}
+		\text{Servidor A: } &\frac{500 \text{ GB}}{10 \text{ horas}} = 50 \text{ GB/hora}\\
+		\text{Servidor B: } &\frac{300 \text{ GB}}{8 \text{ horas}} = 37.5 \text{ GB/hora}
+	\end{align}
+	
+	\subsubsection*{Paso 3: Función Objetivo}
+	\begin{equation}
+		\boxed{\text{Maximizar } Z = 50x + 37.5y \text{ (GB procesados)}}
+	\end{equation}
+	
+	\subsubsection*{Paso 4: Restricciones del Problema}
+	\begin{align}
+		x &\leq 12 \quad \text{(límite diario Servidor A)}\\
+		y &\leq 12 \quad \text{(límite diario Servidor B)}\\
+		50x + 37.5y &\leq 4000 \quad \text{(límite almacenamiento)}\\
+		50x + 30y &\leq 1200 \quad \text{(presupuesto energía)}\\
+		x &\geq 0, \quad y \geq 0 \quad \text{(no negatividad)}
+	\end{align}
+	
+	\subsubsection*{Paso 5: Simplificación de Restricciones}
+	\textbf{Restricción 3:} $50x + 37.5y \leq 4000$
+	\begin{equation}
+		\text{Dividiendo entre 12.5: } \quad 4x + 3y \leq 320
+	\end{equation}
+	
+	\textbf{Restricción 4:} $50x + 30y \leq 1200$
+	\begin{equation}
+		\text{Dividiendo entre 10: } \quad 5x + 3y \leq 120
+	\end{equation}
+	
+	\subsubsection*{Paso 6: Análisis de Vértices de la Región Factible}
+	
+	\textbf{Verificación de intersecciones:}
+	
+	\textbf{Intersección restricciones 1 y 4:} $x = 12$ y $5x + 3y = 120$
+	\begin{align}
+		5(12) + 3y &= 120\\
+		60 + 3y &= 120\\
+		3y &= 60\\
+		y &= 20
+	\end{align}
+	Como $y > 12$, \textbf{no es factible}.
+	
+	\textbf{Intersección restricciones 2 y 4:} $y = 12$ y $5x + 3y = 120$
+	\begin{align}
+		5x + 3(12) &= 120\\
+		5x + 36 &= 120\\
+		5x &= 84\\
+		x &= 16.8
+	\end{align}
+	Como $x > 12$, \textbf{no es factible}.
+	
+	\textbf{Vértices factibles identificados:}
+	\begin{itemize}
+		\item $(0, 0)$
+		\item $(0, 12)$ - Verificación: $5(0) + 3(12) = 36 \leq 120$ $\checkmark$
+		\item $(12, 0)$ - Verificación: $5(12) + 3(0) = 60 \leq 120$ $\checkmark$
+		\item $(12, 12)$ - Verificación: $5(12) + 3(12) = 96 \leq 120$ $\checkmark$
+	\end{itemize}
+	
+	\subsubsection*{Paso 7: Evaluación de la Función Objetivo}
+	\begin{align}
+		Z(0, 0) &= 50(0) + 37.5(0) = 0 \text{ GB}\\
+		Z(0, 12) &= 50(0) + 37.5(12) = 450 \text{ GB}\\
+		Z(12, 0) &= 50(12) + 37.5(0) = 600 \text{ GB}\\
+		Z(12, 12) &= 50(12) + 37.5(12) = 1050 \text{ GB}
+	\end{align}
+	
+	\subsubsection*{Paso 8: Verificación de la Solución Óptima}
+	\textbf{Punto óptimo:} $(12, 12)$
+	
+	\textbf{Verificación de restricciones:}
+	\begin{align}
+		\text{Tiempo: } &x = 12 \leq 12 \text{ } \checkmark, \quad y = 12 \leq 12 \text{ } \checkmark\\
+		\text{Almacenamiento: } &50(12) + 37.5(12) = 1050 \leq 4000 \text{ } \checkmark\\
+		\text{Energía: } &50(12) + 30(12) = 960 \leq 1200 \text{ } \checkmark
+	\end{align}
+	
+	\begin{center}
+		\fbox{\begin{minipage}{0.8\textwidth}
+				\textbf{RESULTADO PREGUNTA 1}
+				\begin{align}
+					x^* &= 12 \text{ horas (Servidor A)}\\
+					y^* &= 12 \text{ horas (Servidor B)}\\
+					Z^* &= 1050 \text{ GB procesados por día}
+				\end{align}
+				\textbf{Costo energético:} 960 soles (dentro del presupuesto)
+		\end{minipage}}
+	\end{center}
+	
+	\newpage
+	
+	\subsection*{Pregunta Práctica 2: Centros de Videovigilancia}
+	
+	\subsubsection*{Datos del Problema}
+	\begin{itemize}
+		\item \textbf{Centro A:} 80 imágenes/hora, máx. 10 horas/día, almacén 600 imágenes/día
+		\item \textbf{Centro B:} 100 imágenes/hora, máx. 12 horas/día, almacén 600 imágenes/día
+		\item \textbf{Requisito mínimo:} 1200 imágenes/día
+		\item \textbf{Objetivo:} Minimizar horas totales de operación
+	\end{itemize}
+	
+	\subsubsection*{Paso 1: Definición de Variables}
+	\begin{align}
+		x &= \text{horas de funcionamiento del Centro A}\\
+		y &= \text{horas de funcionamiento del Centro B}
+	\end{align}
+	
+	\subsubsection*{Paso 2: Función Objetivo}
+	\begin{equation}
+		\boxed{\text{Minimizar } Z = x + y \text{ (horas totales)}}
+	\end{equation}
+	
+	\subsubsection*{Paso 3: Restricciones del Problema}
+	\begin{align}
+		x &\leq 10 \quad \text{(límite diario Centro A)}\\
+		y &\leq 12 \quad \text{(límite diario Centro B)}\\
+		80x &\leq 600 \Rightarrow x \leq 7.5 \quad \text{(almacenamiento Centro A)}\\
+		100y &\leq 600 \Rightarrow y \leq 6 \quad \text{(almacenamiento Centro B)}\\
+		80x + 100y &\geq 1200 \quad \text{(mínimo imágenes)}\\
+		x &\geq 0, \quad y \geq 0 \quad \text{(no negatividad)}
+	\end{align}
+	
+	\subsubsection*{Paso 4: Restricciones Efectivas}
+	Comparando restricciones:
+	\begin{align}
+		\text{Centro A: } &\min(10, 7.5) = 7.5 \Rightarrow x \leq 7.5\\
+		\text{Centro B: } &\min(12, 6) = 6 \Rightarrow y \leq 6
+	\end{align}
+	
+	\textbf{Sistema final:}
+	\begin{align}
+		x &\leq 7.5\\
+		y &\leq 6\\
+		80x + 100y &\geq 1200\\
+		x &\geq 0, \quad y \geq 0
+	\end{align}
+	
+	\subsubsection*{Paso 5: Simplificación}
+	\begin{equation}
+		80x + 100y \geq 1200 \quad \Rightarrow \quad \boxed{4x + 5y \geq 60}
+	\end{equation}
+	
+	\subsubsection*{Paso 6: Análisis de Puntos Extremos}
+	\textbf{¿Puede $x = 0$?}
+	\begin{align}
+		4(0) + 5y &\geq 60\\
+		5y &\geq 60\\
+		y &\geq 12
+	\end{align}
+	Como $y \leq 6$, entonces $x = 0$ \textbf{no es factible}.
+	
+	\textbf{¿Puede $y = 0$?}
+	\begin{align}
+		4x + 5(0) &\geq 60\\
+		4x &\geq 60\\
+		x &\geq 15
+	\end{align}
+	Como $x \leq 7.5$, entonces $y = 0$ \textbf{no es factible}.
+	
+	\subsubsection*{Paso 7: Intersección $4x + 5y = 60$ con límites}
+	\textbf{Con $x = 7.5$:}
+	\begin{align}
+		4(7.5) + 5y &= 60\\
+		30 + 5y &= 60\\
+		5y &= 30\\
+		y &= 6
+	\end{align}
+	\textbf{Punto:} $(7.5, 6)$
+	
+	\textbf{Con $y = 6$:}
+	\begin{align}
+		4x + 5(6) &= 60\\
+		4x + 30 &= 60\\
+		4x &= 30\\
+		x &= 7.5
+	\end{align}
+	\textbf{Punto:} $(7.5, 6)$ (mismo punto)
+	
+	\subsubsection*{Paso 8: Verificación de Factibilidad}
+	\textbf{Punto candidato:} $(7.5, 6)$
+	\begin{align}
+		\checkmark \quad x = 7.5 &\leq 7.5\\
+		\checkmark \quad y = 6 &\leq 6\\
+		\checkmark \quad 4(7.5) + 5(6) = 60 &\geq 60\\
+		\checkmark \quad x = 7.5 &\geq 0\\
+		\checkmark \quad y = 6 &\geq 0
+	\end{align}
+	
+	\textbf{Verificación de producción:}
+	\begin{align}
+		\text{Centro A: } &80 \times 7.5 = 600 \text{ imágenes}\\
+		\text{Centro B: } &100 \times 6 = 600 \text{ imágenes}\\
+		\text{Total: } &1200 \text{ imágenes} \geq 1200 \quad \checkmark
+	\end{align}
+	
+	\subsubsection*{Paso 9: Evaluación de la Función Objetivo}
+	\begin{align}
+		Z &= x + y\\
+		Z &= 7.5 + 6\\
+		Z &= 13.5 \text{ horas}
+	\end{align}
+	
+	\begin{center}
+		\fbox{\begin{minipage}{0.8\textwidth}
+				\textbf{RESULTADO PREGUNTA 2}
+				\begin{align}
+					x^* &= 7.5 \text{ horas (Centro A)}\\
+					y^* &= 6 \text{ horas (Centro B)}\\
+					Z^* &= 13.5 \text{ horas totales}
+				\end{align}
+				\textbf{Imágenes procesadas:} 1200 (exactamente el mínimo requerido)\\
+				\textbf{Nota:} Ambos centros operan al límite de capacidad de almacenamiento
+		\end{minipage}}
+	\end{center}
+	
+\end{document}
